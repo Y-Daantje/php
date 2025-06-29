@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Gegenereerd op: 20 jan 2025 om 11:34
+-- Gegenereerd op: 20 jan 2025 om 10:42
 -- Serverversie: 10.4.32-MariaDB
 -- PHP-versie: 8.2.12
 
@@ -29,7 +29,6 @@ USE `laptop4u`;
 -- Tabelstructuur voor tabel `laptops`
 --
 
-DROP TABLE IF EXISTS `laptops`;
 CREATE TABLE `laptops` (
   `id` int(11) NOT NULL,
   `category` varchar(255) NOT NULL,
@@ -46,13 +45,12 @@ CREATE TABLE `laptops` (
 
 INSERT INTO `laptops` (`id`, `category`, `merk`, `type`, `memory`, `hd`, `prijs`) VALUES
 (1, 'Ultrabooks', 'Dell', 'XPS 13', 128, 2048, 1278.50),
-(2, 'Ultrabooks', 'Apple', 'Macbooks Air', 128, 512, 2378.45),
-(3, 'Gaming laptop', 'Asus', 'ROG Zephyrus', 128, 2048, 1278.50),
-(4, 'Gaming laptop', 'MSI', 'Stealth', 64, 2048, 1856.89),
-(5, 'Chromebooks', 'Google', 'Pixelbook', 16, 32, 231.78),
-(6, 'Chromebooks', 'HP', 'Chromebook', 8, 16, 345.00),
-(7, '2-in-1 Laptops', 'Microsoft', 'Surface Pro', 32, 128, 1278.50),
-(8, 'Zakelijke Laptops', 'HP', 'Eliteboooks', 64, 2048, 2498.50);
+(2, 'category', 'Apple', 'Mackbook Air', 128, 512, 2378.45),
+(3, 'Ultrabooks', 'Asus', 'ROG Zephyrus', 128, 2048, 1278.50),
+(4, 'Gaming laptops', 'MSi', 'stealth', 64, 2048, 1232.34),
+(5, 'Chromebooks', 'Googel', 'Pixelbook', 16, 32, 234.43),
+(6, 'Chromebooks', 'HP', 'Chromebooks', 8, 16, 345.00),
+(7, 'Zakelijke laptops', 'microsoft', 'Surface Pro', 32, 128, 2345.50);
 
 --
 -- Indexen voor geëxporteerde tabellen
