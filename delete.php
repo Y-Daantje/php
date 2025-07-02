@@ -1,19 +1,22 @@
 <?php
-include_once 'database/databae.php';
+include_once 'module/databae.php';
+
+
 global $db;
+$sth = $db->prepare('SELECT * FROM cars WHERE id=? ');
+$sth->bindParam(1, $_GET['id']);
+$sth->execute();
+$sth->setFetchMode(PDO::FETCH_ASSOC);
+$car=$sth->fetch();
 
-$query = $db->prepare("SELECT * FROM laptops WHERE id= :id");
-$query->bindValue(':id',$_GET['id']);
-$query->execute();
-$laptops = $query->fetchAll(PDO::FETCH_ASSOC);
-
-if(isset($_POST["delete"])) {
-    $query = $db->prepare("DELETE FROM laptops WHERE id= :id");
-    $query->bindParam(":id", $_GET["id"]);
-    $query->execute();
-    header("location:read.php");
+if(isset($_POST['submit'])) {
+    $sth=$db->prepare('DELETE FROM cars WHERE id=:id');
+    $sth->bindParam(':id',$_GET['id']);
+    $sth->execute();
+    header('Location:read.php');
 }
 ?>
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -21,39 +24,39 @@ if(isset($_POST["delete"])) {
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <title>Document</title>
+    <title>Cars4u</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+
 </head>
 <body>
 <div class="container">
     <h1>Verwijder de volgende rij?</h1>
-    <table class="table">
-        <tr>
-            <th>category</th>
+    <form method="post">
+        <table class="table">
+            <thead>
+            <th>id</th>
             <th>merk</th>
             <th>type</th>
-            <th>memory</th>
-            <th>hd</th>
+            <th>kilometerstand</th>
+            <th>kleur</th>
             <th>prijs</th>
-        </tr>
-        <?php foreach ($laptops as $laptop):?>
+            </thead>
+            <tbody>
             <tr>
-                <td><?= $laptop['category'] ?></td>
-                <td><?= $laptop['merk'] ?></td>
-                <td><?= $laptop['type'] ?></td>
-                <td><?= $laptop['memory'] ?></td>
-                <td><?= $laptop['hd'] ?></td>
-                <td><?= $laptop['prijs'] ?></td>
+                <td><?= $car['id'] ?></td>
+                <td><?= $car['merk']?></td>
+                <td><?= $car['type']?></td>
+                <td><?=$car['kilometerstand']?></td>
+                <td><?=$car['kleur']?></td>
+                <td><?=$car['prijs']?></td>
             </tr>
-        <?php endforeach;?>
-    </table>
-    <form method="post">
-        <input type="submit" name="delete" class="btn btn-primary" value="delete">
+            </tbody>
+        </table>
+
+        <input type="submit" class="btn btn-primary" name="submit" value="delete">
         <a href="read.php" class="btn btn-primary">back</a>
     </form>
-
 </div>
 </body>
 </html>
-
-

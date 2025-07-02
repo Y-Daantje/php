@@ -1,5 +1,6 @@
 <?php
-include_once 'database/databae.php';
+include_once 'module/databae.php';
+
 global $db;
 
 $query = $db->prepare("SELECT * FROM laptops WHERE id= :id");
