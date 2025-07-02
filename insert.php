@@ -49,8 +49,8 @@ if(isset($_POST['submit'])) {
 
     if($vendorError==="" && $typeError==="" && $kmError==="" && $colorError==="" && $priceError==="")
     {
-        global $pdo;
-        $sth=$pdo->prepare('INSERT INTO cars (merk,type,kilometerstand,kleur,prijs) VALUES 
+        global $db;
+        $sth=$db->prepare('INSERT INTO cars (merk,type,kilometerstand,kleur,prijs) VALUES 
                                                             (:vendor,:type,:km,:color,:price)');
         $sth->bindParam(':vendor', $vendor);
         $sth->bindParam(':type', $type);

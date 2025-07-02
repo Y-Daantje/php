@@ -49,8 +49,8 @@ if(isset($_POST['submit'])) {
 
     if($vendorError==="" && $typeError==="" && $kmError==="" && $colorError==="" && $priceError==="")
     {
-        global $pdo;
-        $sth=$pdo->prepare("UPDATE cars SET merk=:vendor, type=:type, kilometerstand=:km,
+        global $db;
+        $sth=$db->prepare("UPDATE cars SET merk=:vendor, type=:type, kilometerstand=:km,
                 kleur=:color,prijs=:price WHERE id=:id");
 
         $sth->bindParam(':vendor', $vendor);
@@ -64,8 +64,8 @@ if(isset($_POST['submit'])) {
     }
 
 } else {
-    global $pdo;
-    $query=$pdo->prepare("SELECT * FROM cars WHERE id=:id");
+    global $db;
+    $query=$db->prepare("SELECT * FROM cars WHERE id=:id");
     $query->bindParam(':id', $_GET['id']);
     $query->execute();
     $query->setFetchMode(PDO::FETCH_ASSOC);
@@ -131,7 +131,7 @@ if(isset($_POST['submit'])) {
         </div>
 
         <input type="submit" class="btn btn-primary" name="submit" value="insert">
-        <a href="index.php" class="btn btn-primary">back</a>
+        <a href="read.php" class="btn btn-primary">back</a>
     </form>
 </div>
 </body>
